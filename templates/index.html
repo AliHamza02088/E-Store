@@ -72,7 +72,7 @@
             <div class="container">
                 <!-- BEGIN section-title -->
                 <h4 class="section-title clearfix">
-                    <a href="#" class="pull-right">SHOW ALL</a>
+                    <a href="{% url 'product' %}" class="pull-right">SHOW ALL</a>
                     Exclusive promotions
                     <small>from 25 September 2016 - 1 January 2017</small>
                 </h4>
@@ -206,7 +206,7 @@
             <div class="container">
                 <!-- BEGIN section-title -->
                 <h4 class="section-title clearfix">
-                    <a href="#" class="pull-right">SHOW ALL</a>
+                    <a href="{% url 'product' %}" class="pull-right">SHOW ALL</a>
                     Mobile Phones
                     <small>Shop and get your favourite phone at amazing prices!</small>
                 </h4>
@@ -218,9 +218,9 @@
                         <ul class="category-list">
                             <li class="list-header">Top Categories</li>
                             {% for sub_category in sub_categories %}
-                            <li><a href="{% url 'index' %}?subcategory={{ sub_category.name }}" {% if selected_subcategory == sub_category.name %}style="font-weight: bold; color: #ff6b6b;"{% endif %}>{{ sub_category.name }}</a></li>
+                            <li><a href="{% url 'index' %}?mobile_subcategory={{ sub_category.name }}{% if selected_tablet_subcategory %}&tablet_subcategory={{ selected_tablet_subcategory }}{% endif %}" {% if selected_mobile_subcategory == sub_category.name %}style="font-weight: bold; color: #16dceb9c;"{% endif %}>{{ sub_category.name }}</a></li>
                             {% endfor %}
-                            <li><a href="{% url 'index' %}">All Brands</a></li>
+                            <li><a href="{% url 'index' %}{% if selected_tablet_subcategory %}?tablet_subcategory={{ selected_tablet_subcategory }}{% endif %}">All Brands</a></li>
                         </ul>
                     </div>
                     <!-- END category-sidebar -->
@@ -243,10 +243,10 @@
                         <!-- BEGIN category-item -->                            
                         <div class="category-item list">
                             <!-- Filter Info -->
-                            {% if selected_subcategory %}
+                            {% if selected_mobile_subcategory %}
                             <div style="padding: 15px; background-color: #f8f9fa; border-radius: 4px; margin-bottom: 15px;">
                                 <h5 style="margin: 0 0 10px 0;">
-                                    <strong>Brand:</strong> {{ selected_subcategory }}
+                                    <strong>Brand:</strong> {{ selected_mobile_subcategory }}
                                     <a href="{% url 'index' %}" style="margin-left: 10px; font-size: 12px; color: #007bff;">[Clear Filter]</a>
                                 </h5>
                                 <p style="margin: 0; color: #666; font-size: 13px;">
@@ -301,7 +301,7 @@
             <div class="container">
                 <!-- BEGIN section-title -->
                 <h4 class="section-title clearfix">
-                    <a href="#" class="pull-right">SHOW ALL</a>
+                    <a href='{% url "product" %}' class="pull-right">SHOW ALL</a>
                     Tablet
                     <small>Shop and get your favourite tablet at amazing prices!</small>
                 </h4>
@@ -312,12 +312,10 @@
                     <div class="category-sidebar">
                         <ul class="category-list">
                             <li class="list-header">Top Categories</li>
-                            <li><a href="#">Apple</a></li>
-                            <li><a href="#">HP</a></li>
-                            <li><a href="#">Huawei</a></li>
-                            <li><a href="#">Samsung</a></li>
-                            <li><a href="#">Sony</a></li>
-                            <li><a href="#">All Brands</a></li>
+                            {% for sub_category in sub_categories %}
+                            <li><a href="{% url 'index' %}?tablet_subcategory={{ sub_category.name }}{% if selected_mobile_subcategory %}&mobile_subcategory={{ selected_mobile_subcategory }}{% endif %}" {% if selected_tablet_subcategory == sub_category.name %}style="font-weight: bold; color: #16dceb9c;"{% endif %}>{{ sub_category.name }}</a></li>
+                            {% endfor %}
+                            <li><a href="{% url 'index' %}{% if selected_mobile_subcategory %}?mobile_subcategory={{ selected_mobile_subcategory }}{% endif %}">All Brands</a></li>
                         </ul>
                     </div>
                     <!-- END category-sidebar -->
@@ -341,14 +339,16 @@
                         <div class="category-item list">
                             <!-- BEGIN item-row -->
                             <div class="item-row">   
-                                {% for tablet in tablets %}
-                                <!-- BEGIN item -->
-                                <div class="item item-thumbnail">
-                                    <a href="{% url 'product_detail' tablet.id %}" class="item-image">
-                                        <img src="{{ tablet.image }}" alt="" />
-                                        <div class="discount">{{ tablet.discount }}</div>
-                                    </a>
-                                    <div class="item-info">
+                            
+                        {% if tablets %}       
+                            {% for tablet in tablets %}
+                            <!-- BEGIN item -->
+                            <div class="item item-thumbnail">
+                                <a href="{% url 'product_detail' tablet.id %}" class="item-image">
+                                    <img src="{{ tablet.image }}" alt="" />
+                                    <div class="discount">{{ tablet.discount }}</div>
+                                </a>
+                                <div class="item-info">
                                         <h4 class="item-title">
                                             <a href="{% url 'product_detail' tablet.id %}">{{ tablet.name }}<br />32GB</a>
                                         </h4>
@@ -359,7 +359,13 @@
                                 </div>
                                 <!-- END item -->
                                 {% endfor %}
+                        {% else %}
+                            <div style="padding: 20px; text-align: center; color: #999;">
+                                <p>No products found for <strong>{{ selected_tablet_subcategory }}</strong></p>
+                                <a href="{% url 'index' %}" style="color: #007bff;">View all products</a>
                             </div>
+                        {% endif %}
+                            </div>  
                             <!-- END item-row -->
                         </div>
                         <!-- END category-item -->

@@ -51,162 +51,27 @@
                         <div class="search-item-container">
                             <!-- BEGIN item-row -->
                             <div class="item-row">
+                                {% for product in product %}
                                 <!-- BEGIN item -->
-                                <div class="item item-thumbnail">
-                                    <a href="{% url 'product_detail' %}" class="item-image">
-                                        <img src="{% static 'img/iphone.png' %}" alt="" />
-                                        <div class="discount">15% OFF</div> 
-                                    </a>
-                                    <div class="item-info">
-                                        <h4 class="item-title">
-                                            <a href="{% url 'product_detail' %}">iPhone 6s Plus<br />16GB</a>
-                                        </h4>
-                                        <p class="item-desc">3D Touch. 12MP photos. 4K video.</p>
-                                        <div class="item-price">$649.00</div>
-                                        <div class="item-discount-price">$739.00</div>
+                                    <div class="item item-thumbnail">
+                                        <a href="{% url 'product_detail' product.id %}" class="item-image">
+                                            <img src="{{ product.image }}" alt="" />
+                                            <div class="discount">{{ product.discount_percentage }}% OFF</div> 
+                                        </a>
+                                        <div class="item-info">
+                                            <h4 class="item-title">
+                                                <a href="{% url 'product_detail' product.id %}">{{ product.name }}<br />{{ product.size }}</a>
+                                            </h4> 
+                                            <p class="item-desc">{{ product.description }}</p>
+                                            <div class="item-price">${{ product.price }}</div>
+                                            <div class="item-discount-price">${{ product.price|add:product.discount }}</div>
+                                        </div>
                                     </div>
-                                </div>
                                 <!-- END item -->
-                                <!-- BEGIN item -->
-                                <div class="item item-thumbnail">
-                                    <a href="{% static 'product-detail.html' %}" class="item-image">
-                                        <img src="{% static 'img/apple-tv.png' %}" alt="" />
-                                        <div class="discount">32% OFF</div>
-                                    </a>
-                                    <div class="item-info">
-                                        <h4 class="item-title">
-                                            <a href="{% static 'product.html' %}">Apple TV<br />2016</a>
-                                        </h4>
-                                        <p class="item-desc">The future of television is here.</p>
-                                        <div class="item-price">$599.00</div>
-                                        <div class="item-discount-price">$799.00</div>
-                                    </div>
-                                </div>
-                                <!-- END item -->
-                                <!-- BEGIN item -->
-                                <div class="item item-thumbnail">
-                                    <a href="{% static 'product-detail.html' %}" class="item-image">
-                                        <img src="{% static 'img/iphone-se.png' %}" alt="" />
-                                        <div class="discount">20% OFF</div>
-                                    </a>
-                                    <div class="item-info">
-                                        <h4 class="item-title">
-                                            <a href="{% static 'product.html' %}">iPhone SE<br />32/64Gb</a>
-                                        </h4>
-                                        <p class="item-desc">A big step for small.</p>
-                                        <div class="item-price">$499.00</div>
-                                        <div class="item-discount-price">$599.00</div>
-                                    </div>
-                                </div>
-                                <!-- END item -->
-                            </div>
-                            <!-- END item-row -->
-                            <!-- BEGIN item-row -->
-                            <div class="item-row">
-                                <!-- BEGIN item -->
-                                <div class="item item-thumbnail">
-                                    <a href="{% static 'product-detail.html' %}" class="item-image">
-                                        <img src="{% static 'img/apple-watch.png' %}" alt="" />
-                                        <div class="discount">15% OFF</div>
-                                    </a>
-                                    <div class="item-info">
-                                        <h4 class="item-title">
-                                            <a href="{% static 'product-detail.html' %}">Apple Watch<br />‏Sport Edition</a>
-                                        </h4>
-                                        <p class="item-desc">You. At a glance.</p>
-                                        <div class="item-price">$399.00</div>
-                                        <div class="item-discount-price">$453.00</div>
-                                    </div>
-                                </div>
-                                <!-- END item -->
-                                <!-- BEGIN item -->
-                                <div class="item item-thumbnail">
-                                    <a href="{% static 'product-detail.html' %}" class="item-image">
-                                        <img src="{% static 'img/imac.png' %}" alt="" />
-                                        <div class="discount">32% OFF</div>
-                                    </a>
-                                    <div class="item-info">
-                                        <h4 class="item-title">
-                                            <a href="{% static 'product.html' %}">21.5-inch iMac<br />with Retina Display</a>
-                                        </h4>
-                                        <p class="item-desc">Retina. Now in colossal and ginormous.</p>
-                                        <div class="item-price">$599.00</div>
-                                        <div class="item-discount-price">$799.00</div>
-                                    </div>
-                                </div>
-                                <!-- END item -->
-                                <!-- BEGIN item -->
-                                <div class="item item-thumbnail">
-                                    <a href="{% static 'product-detail.html' %}" class="item-image">
-                                        <img src="{% static 'img/macbook-pro.png' %}" alt="" />
-                                        <div class="discount">20% OFF</div>
-                                    </a>
-                                    <div class="item-info">
-                                        <h4 class="item-title">
-                                            <a href="{% static 'product.html' %}">MacBook Pro<br />with Retina Display</a>
-                                        </h4>
-                                        <p class="item-desc">Stunning Retina Display</p>
-                                        <div class="item-price">$99.00</div>
-                                        <div class="item-discount-price">$199.00</div>
-                                    </div>
-                                </div>
-                                <!-- END item -->
-                            </div>
-                            <!-- END item-row -->
-                            <!-- BEGIN item-row -->
-                            <div class="item-row">
-                                <!-- BEGIN item -->
-                                <div class="item item-thumbnail">
-                                    <a href="{% static 'product-detail.html' %}" class="item-image">
-                                        <img src="{% static 'img/ipad-pro.png' %}" alt="" />
-                                        <div class="discount">15% OFF</div>
-                                    </a>
-                                    <div class="item-info">
-                                        <h4 class="item-title">
-                                            <a href="{% static 'product-detail.html' %}">9.7-inch iPad Pro<br />32GB</a>
-                                        </h4>
-                                        <p class="item-desc">3D Touch. 12MP photos. 4K video.</p>
-                                        <div class="item-price">$649.00</div>
-                                        <div class="item-discount-price">$739.00</div>
-                                    </div>
-                                </div>
-                                <!-- END item -->
-                                <!-- BEGIN item -->
-                                <div class="item item-thumbnail">
-                                    <a href="{% static 'product-detail.html' %}" class="item-image">
-                                        <img src="{% static 'img/mac-pro.png' %}" alt="" />
-                                        <div class="discount">32% OFF</div>
-                                    </a>
-                                    <div class="item-info">
-                                        <h4 class="item-title">
-                                            <a href="{% static 'product.html' %}">Mac Pro<br />Quad-Core and Dual GPU</a>
-                                        </h4>
-                                        <p class="item-desc">Built for creativity on an epic scale.</p>
-                                        <div class="item-price">$2999.00</div>
-                                        <div class="item-discount-price">$2599.00</div>
-                                    </div>
-                                </div>
-                                <!-- END item -->
-                                <!-- BEGIN item -->
-                                <div class="item item-thumbnail">
-                                    <a href="{% static 'product-detail.html' %}" class="item-image">
-                                        <img src="{% static 'img/ipad-air.png' %}" alt="" />
-                                        <div class="discount">20% OFF</div>
-                                    </a>
-                                    <div class="item-info">
-                                        <h4 class="item-title">
-                                            <a href="{% static 'product.html' %}">iPad Air 2<br />32/64Gb</a>
-                                        </h4>
-                                        <p class="item-desc">Light. Heavyweight.</p>
-                                        <div class="item-price">$399.00</div>
-                                        <div class="item-discount-price">$459.00</div>
-                                    </div>
-                                </div>
-                                <!-- END item -->
+                                {% endfor %}
                             </div>
                             <!-- END item-row -->
                         </div>
-                        <!-- END search-item-container -->
                         <!-- BEGIN pagination -->
                         <div class="text-center">
                             <ul class="pagination m-t-0">
@@ -263,8 +128,4 @@
             <!-- END container -->
         </div>
         <!-- END search-results -->
-    
-</div>
-    <!-- END #page-container -->
-
 {% endblock %}
